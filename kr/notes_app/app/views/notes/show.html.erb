@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Назва:</strong>
+  <%= @note.title %>
+</p>
+
+<p>
+  <strong>Опис:</strong>
+  <%= @note.body %>
+</p>
+
+<%= link_to 'Редагувати', edit_note_path(@note) %> |
+<%= link_to 'Повернутися', notes_path %>
