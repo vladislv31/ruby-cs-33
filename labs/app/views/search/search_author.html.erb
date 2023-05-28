@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          line-height: 1.5;
+          margin: 0;
+          padding: 0;
+      }
+
+      form {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      label {
+          margin-bottom: 5px;
+          font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      select {
+          width: 100%;
+      }
+
+      input[type="submit"] {
+          padding: 10px;
+          background-color: #0066CC;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      input[type="submit"]:hover {
+          background-color: #003399;
+      }
+
+      ul {
+          list-style: none;
+          padding: 0;
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      li {
+          margin-bottom: 10px;
+      }
+
+      li:before {
+          content: "• ";
+          color: #0066CC;
+          font-weight: bold;
+      }
+
+      p {
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 50px;
+      }
+
+      th, td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid #ccc;
+      }
+
+      th {
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<%= form_tag(search_author_path, method: :get) do %>
+  <label for="name">Name</label>
+  <%= text_field_tag :name, params[:name] %>
+
+  <label for="second_name">Second Name</label>
+  <%= text_field_tag :second_name, params[:second_name] %>
+
+  <label for="age">Age</label>
+  <%= text_field_tag :age, params[:age] %>
+
+  <%= select_tag :sort, options_for_select([['Name (ascending)', 'name ASC'],
+                                            ['Name (descending)', 'name DESC'],
+                                            ['Second Name (ascending)', 'second_name ASC'],
+                                            ['Second Name (descending)', 'second_name DESC'],
+                                            ['Age (ascending)', 'age ASC'],
+                                            ['Age (descending)', 'age DESC'] ],
+                                           selected: params[:sort] || 'name ASC'), prompt: 'Sort by' %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @authors.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Second Name</th>
+      <th>Age</th>
+      <th>Book</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @authors.each do |author| %>
+      <tr>
+        <td><%= author.name %></td>
+        <td><%= author.second_name %></td>
+        <td><%= author.age %></td>
+        <td><%= author.book.title%></td>
+    <% end %>
+    </table>
+<% else %>
+  <p>No authors found.</p>
+<% end %>
+</body>
+</html>

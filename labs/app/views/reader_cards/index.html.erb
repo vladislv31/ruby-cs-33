@@ -1,0 +1,29 @@
+<h1>Reader Cards</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Number</th>
+    <th>Library</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reader_cards.each do |card| %>
+    <tr>
+      <td><%= card.number %></td>
+      <td><%= card.library.name %></td>
+      <td><%= link_to 'Show', card %></td>
+      <td><%= link_to 'Edit', edit_reader_card_path(card) %></td>
+      <td><%= link_to 'Destroy', reader_card_path(card), method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+<%= paginate @reader_cards %>
+<br><br>
+<%= link_to "Export PDF", export_pdf_card_path, class: "btn btn-primary" %>
+<br><br>
+<%= link_to 'New Reader Card', new_reader_card_path, class: "btn btn-primary" %>

@@ -1,0 +1,11 @@
+<p>
+  <strong>Name:</strong>
+  <%= @genre.name %>
+</p>
+<p>
+  <strong>Book:</strong>
+  <%= link_to @genre.book.title, book_path(@genre.book) %>
+</p>
+
+<%= link_to 'Edit', edit_genre_path(@genre), class: "btn btn-primary" %> |
+<%= link_to 'Back', genres_path, class: "btn btn-secondary" %>

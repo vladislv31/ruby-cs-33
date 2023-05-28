@@ -23,7 +23,7 @@ def heapify(arr, n, i):
         arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest)
 
-arr = [3, 2, 1]
+arr = [3, 2, 1, 95, -99]
 heap_sort(arr)
 
 print(arr)

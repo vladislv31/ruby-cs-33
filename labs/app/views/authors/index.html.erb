@@ -1,0 +1,33 @@
+<h1>Authors</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Second Name</th>
+    <th>Age</th>
+    <th>Book</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @authors.each do |author| %>
+    <tr>
+      <td><%= author.name %></td>
+      <td><%= author.second_name %></td>
+      <td><%= author.age %></td>
+      <td><%= link_to author.book.title, book_path(author.book) %></td>
+      <td><%= link_to 'Show', author %></td>
+      <td><%= link_to 'Edit', edit_author_path(author) %></td>
+      <td><%= link_to 'Destroy', author_path(author), method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+<%= paginate @authors %>
+<br><br>
+<%= link_to "Export PDF", export_pdf_author_path, class: "btn btn-primary" %>
+<br><br>
+<%= link_to 'New Author', new_author_path, class: "btn btn-primary" %>

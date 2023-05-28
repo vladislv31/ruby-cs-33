@@ -1,0 +1,32 @@
+<h1>Edit Reader Card</h1>
+
+<%= form_with model: @reader_card, local: true do |form| %>
+  <% if @reader_card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reader_card.errors.count, "error") %> prohibited this reader card from being saved:</h2>
+
+      less
+
+      <ul>
+        <% @reader_card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+  <div class="form-group">
+    <%= form.label :number %>
+    <%= form.text_field :number, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :library_id %>
+    <%= form.collection_select :library_id, Library.all, :id, :name, { prompt: true }, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Update Reader Card", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', reader_cards_path, class: "btn btn-secondary" %>

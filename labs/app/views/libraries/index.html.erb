@@ -1,0 +1,43 @@
+<% if user_signed_in? %>
+  <div>Welcome <%= current_user.email %></div>
+<% end %>
+
+<h1>Libraries</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @libraries.each do |library| %>
+    <tr>
+      <td><%= library.name %></td>
+      <td><%= library.address %></td>
+      <td><%= link_to 'Show', library %></td>
+      <td><%= link_to 'Edit', edit_library_path(library) %></td>
+      <td><%= link_to 'Destroy', library_path(library), method: :delete,
+                      data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= paginate @libraries %>
+<br>
+<%= link_to 'New Library', new_library_path, class: "btn btn-primary" %>
+<br><br>
+<%= link_to "Export Libraries CSV", export_libraries_csv_path, class: "btn btn-primary" %>
+<br><br>
+<%= link_to "Export PDF", export_pdf_library_path, class: "btn btn-primary" %>
+<br><br>
+<%= link_to "Logout", logout_path, method: :get %>
+
+
+
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          line-height: 1.5;
+          margin: 0;
+          padding: 0;
+      }
+
+      form {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      label {
+          margin-bottom: 5px;
+          font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      select {
+          width: 100%;
+      }
+
+      input[type="submit"] {
+          padding: 10px;
+          background-color: #0066CC;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      input[type="submit"]:hover {
+          background-color: #003399;
+      }
+
+      ul {
+          list-style: none;
+          padding: 0;
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      li {
+          margin-bottom: 10px;
+      }
+
+      li:before {
+          content: "• ";
+          color: #0066CC;
+          font-weight: bold;
+      }
+
+      p {
+          width: 50%;
+          margin: 50px auto 0;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 50px;
+      }
+
+      th, td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid #ccc;
+      }
+
+      th {
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<%= form_tag(search_genre_path, method: :get) do %>
+  <label for="name">Name</label>
+  <%= text_field_tag :name, params[:name] %>
+
+  <%= select_tag :sort, options_for_select([['Name (ascending)', 'name ASC'],
+                                            ['Name (descending)', 'name DESC']],
+                                           selected: params[:sort] || 'name ASC'), prompt: 'Sort by' %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @genres.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Book</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td><%= genre.name %></td>
+        <td><%= genre.book.title%></td>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No genres found</p>
+<% end %>
+</body>
+</html>

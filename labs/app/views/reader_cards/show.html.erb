@@ -1,0 +1,13 @@
+<h1>Reader Card</h1>
+<p>
+  <strong>Number:</strong>
+  <%= @reader_card.number %>
+</p>
+<p>
+  <strong>Library:</strong>
+  <%= @reader_card.library.name %>
+</p>
+<br>
+
+<%= link_to 'Edit', edit_reader_card_path(@reader_card), class: "btn btn-primary" %>
+<%= link_to 'Back', reader_cards_path, class: "btn btn-secondary" %>

@@ -1,0 +1,20 @@
+<p>
+  <strong>Name:</strong>
+  <%= @library.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @library.address %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @library.year %>
+</p>
+
+<%= link_to 'Edit', edit_library_path(@library), class: "btn btn-primary" %> |
+<%= link_to 'Back', libraries_path, class: "btn btn-secondary" %>
+<br><br>
+<%= link_to "Export PDF", export_pdf_lib_id_path(id: @library.id), class: "btn btn-primary" %>
+
